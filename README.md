@@ -9,8 +9,8 @@
 - Update plant page : `plants/<plant_id>/update/`,
 - Delete Plant : `plants/<plant_id>/delete/`
 - Search Page : `plants/search/`
-- Contact Us page : `contact/`
-- Contact Us Messages page : `contact/messages/`
+- (Bonus) Contact Us page : `contact/`
+- (Bonus) Contact Us Messages page : `contact/messages/`
 
 
 ### Notes:
