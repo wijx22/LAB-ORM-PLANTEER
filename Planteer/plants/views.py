@@ -3,6 +3,8 @@
 from django.shortcuts import render
 from .models import Plant
 
+
+
 def all_plants(request):
     category = request.GET.get('category', None)
     is_edible = request.GET.get('is_edible', None)
@@ -75,7 +77,7 @@ def search_plants(request):
 
 from django.shortcuts import render, redirect
 from .models import Plant
-from .forms import PlantForm  # تأكدي أن لديك فورم للنبات
+from .forms import PlantForm  
 from django.contrib import messages
 
 def add_plant(request):
@@ -84,7 +86,7 @@ def add_plant(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Plant added successfully!")
-            return redirect('all_plants')  # غيريها للمكان المناسب
+            return redirect('all_plants')  
     else:
         form = PlantForm()
     
@@ -125,3 +127,43 @@ def delete_plant(request, plant_id):
         return redirect('all_plants')
 
     return render(request, 'plants/delete_plant.html', {'plant': plant})
+
+
+
+
+
+
+
+
+
+
+from django.shortcuts import render, get_object_or_404
+from .models import Plant, Comment
+
+def plant_detail(request, plant_id):
+    plant = get_object_or_404(Plant, id=plant_id)
+    related_plants = Plant.objects.filter(category=plant.category).exclude(id=plant_id)[:3]
+    comments = Comment.objects.filter(plant=plant)
+
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        content = request.POST.get("content")
+        Comment.objects.create(plant=plant, full_name=full_name, content=content)
+
+    return render(request, "plants/plant_detail.html", {
+        "plant": plant,
+        "related_plants": related_plants,
+        "comments": comments,
+    })
+
+
+
+
+from django.shortcuts import render
+from .models import Plant
+import random
+
+def home(request):
+    all_plants = list(Plant.objects.all())
+    featured_plants = random.sample(all_plants, min(len(all_plants), 3))
+    return render(request, 'home.html', {'featured_plants': featured_plants})
