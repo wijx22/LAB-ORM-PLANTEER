@@ -1,15 +1,18 @@
 from django.shortcuts import render
-
-
-
-# Create your views here.
-from django.shortcuts import render
-
-def home(request):
-    return render(request, 'core/home.html')
-
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+from plants.models import Plant  
+from plants.forms import PlantForm
 from django.contrib import messages
+
+
+def home(request:HttpRequest):
+    plants = Plant.objects.all()[:5]
+    print("hiii", plants)
+    return render(request, 'core/home.html', {'plants': plants})
+    
+   
+
+
 
 def contact(request):
     if request.method == "POST":
@@ -22,12 +25,6 @@ def contact(request):
     
     return render(request, 'core/contact.html')
 
-
-
-from django.shortcuts import render
-
-def home(request):
-    return render(request, 'core/home.html')
 
 
 

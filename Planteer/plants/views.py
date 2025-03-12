@@ -167,3 +167,8 @@ def home(request):
     all_plants = list(Plant.objects.all())
     featured_plants = random.sample(all_plants, min(len(all_plants), 3))
     return render(request, 'home.html', {'featured_plants': featured_plants})
+
+
+
+
+

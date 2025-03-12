@@ -5,7 +5,7 @@
 {% block content %}
     <h1>All Plants</h1>
 
-    <form method="GET" action="{% url 'all_plants' %}" class="mb-4">
+    <form method="GET" action="{% url 'plants:all_plants' %}" class="mb-4">
         <label for="category">Category:</label>
         <select name="category">
             <option value="">All</option>
@@ -31,9 +31,9 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ plant.name }}</h5>
                         <p class="card-text">Category: {{ plant.category }}</p>
-                        <a href="{% url 'plant_detail' plant.id %}" class="btn btn-primary">View Details</a>
-                        <a href="{% url 'update_plant' plant.id %}" class="btn btn-warning">Update</a>
-                        <a href="{% url 'delete_plant' plant.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'plants:plant_detail' plant.id %}" class="btn btn-primary">View Details</a>
+                        <a href="{% url 'plants:update_plant' plant.id %}" class="btn btn-warning">Update</a>
+                        <a href="{% url 'plants:delete_plant' plant.id %}" class="btn btn-danger">Delete</a>
 
                     </div>
                 </div>
