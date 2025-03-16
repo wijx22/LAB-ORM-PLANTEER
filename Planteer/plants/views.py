@@ -86,7 +86,7 @@ def add_plant(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Plant added successfully!")
-            return redirect('all_plants')  
+            return redirect('plants:all_plants')  
     else:
         form = PlantForm()
     
@@ -107,7 +107,7 @@ def update_plant(request, plant_id):
         form = PlantForm(request.POST, request.FILES, instance=plant)
         if form.is_valid():
             form.save()
-            return redirect('all_plants')
+            return redirect('plants:all_plants')
     else:
         form = PlantForm(instance=plant)
 
@@ -124,7 +124,7 @@ def delete_plant(request, plant_id):
     plant = get_object_or_404(Plant, id=plant_id)
     if request.method == "POST":
         plant.delete()
-        return redirect('all_plants')
+        return redirect('plants:all_plants')
 
     return render(request, 'plants/delete_plant.html', {'plant': plant})
 
